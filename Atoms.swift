@@ -41,17 +41,17 @@ class Atoms {
         carbonAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
         return carbonAtom
     }
-    class func cobaltAtom() -> SCNGeometry {  //27
-        let cobaltAtom = SCNSphere(radius: 1.92)
-        cobaltAtom.firstMaterial!.diffuse.contents = UIColor.darkGrayColor()
-        cobaltAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
-        return cobaltAtom
-    }
     class func chlorineAtom() -> SCNGeometry {  //17
         let chlorineAtom = SCNSphere(radius: 1.175)
         chlorineAtom.firstMaterial!.diffuse.contents = UIColor.greenColor()
         chlorineAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
         return chlorineAtom
+    }
+    class func cobaltAtom() -> SCNGeometry {  //27
+        let cobaltAtom = SCNSphere(radius: 1.92)
+        cobaltAtom.firstMaterial!.diffuse.contents = UIColor.darkGrayColor()
+        cobaltAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
+        return cobaltAtom
     }
     class func copperAtom() -> SCNGeometry {  //29
         let copperAtom = SCNSphere(radius: 1.40)
@@ -163,7 +163,7 @@ class Atoms {
     }
     class func phosphorusAtom() -> SCNGeometry {  //15
         let phosphorusAtom = SCNSphere(radius: 1.80)
-        phosphorusAtom.firstMaterial!.diffuse.contents = UIColor.purpleColor()
+        phosphorusAtom.firstMaterial!.diffuse.contents = UIColor.crayons_plumColor(1.0)
         phosphorusAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
         return phosphorusAtom
     }
@@ -175,8 +175,17 @@ class Atoms {
     }
     class func potassiumAtom() -> SCNGeometry {  //19
         let potassiumAtom = SCNSphere(radius: 2.75)
-        potassiumAtom.firstMaterial!.diffuse.contents = UIColor.crayons_grapeColor(1.0)
+//        potassiumAtom.firstMaterial!.diffuse.contents = UIColor.crayons_grapeColor(1.0)
         potassiumAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
+        potassiumAtom.segmentCount = 48;
+        potassiumAtom.firstMaterial!.diffuse.contents = "iTunesArtwork@2x_clear.png"
+//        potassiumAtom.firstMaterial!.specular.contents = "earth-specular.jpg"
+        potassiumAtom.firstMaterial!.specular.intensity = 0.2
+        
+//        potassiumAtom.firstMaterial!.shininess = 0.1
+//        potassiumAtom.firstMaterial!.reflective.contents = "envmap.jpg"
+//        potassiumAtom.firstMaterial!.reflective.intensity = 0.5
+//        potassiumAtom.firstMaterial!.fresnelExponent = 2
         return potassiumAtom
     }
     class func seleniumAtom() -> SCNGeometry {  //34
@@ -199,7 +208,7 @@ class Atoms {
     }
     class func sodiumAtom() -> SCNGeometry {  //11
         let sodiumAtom = SCNSphere(radius: 2.27)
-        sodiumAtom.firstMaterial!.diffuse.contents = UIColor.crayons_plumColor(1.0)
+        sodiumAtom.firstMaterial!.diffuse.contents = UIColor.crayons_grapeColor(1.0)
         sodiumAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
         return sodiumAtom
     }
@@ -247,18 +256,94 @@ class Atoms {
     }
     class func allAtoms() -> SCNNode {
         let atomsNode = SCNNode()
+
+        let argonNode = SCNNode(geometry: argonAtom())
+        argonNode.position = SCNVector3Make(-10, 12, 0)
+        atomsNode.addChildNode(argonNode)
+        
+        let arsenicNode = SCNNode(geometry: arsenicAtom())
+        arsenicNode.position = SCNVector3Make(-6, 12, 0)
+        atomsNode.addChildNode(arsenicNode)
+        
+        let bromineNode = SCNNode(geometry: bromineAtom())
+        bromineNode.position = SCNVector3Make(-2, 12, 0)
+        atomsNode.addChildNode(bromineNode)
+        
+        let cadmiumNode = SCNNode(geometry: cadmiumAtom())
+        cadmiumNode.position = SCNVector3Make( 2, 12, 0)
+        atomsNode.addChildNode(cadmiumNode)
         
         let carbonNode = SCNNode(geometry: carbonAtom())
-        carbonNode.position = SCNVector3Make(-10, 0, 0)
+        carbonNode.position = SCNVector3Make( 6, 12, 0)
         atomsNode.addChildNode(carbonNode)
         
+        let chlorineNode = SCNNode(geometry: chlorineAtom())
+        chlorineNode.position = SCNVector3Make( 10, 12, 0)
+        atomsNode.addChildNode(chlorineNode)
+        
+        let cobaltNode = SCNNode(geometry: cobaltAtom())
+        cobaltNode.position = SCNVector3Make(-10, 8, 0)
+        atomsNode.addChildNode(cobaltNode)
+        
+        let copperNode = SCNNode(geometry: copperAtom())
+        copperNode.position = SCNVector3Make(-6, 8, 0)
+        atomsNode.addChildNode(copperNode)
+        
         let fluorineNode = SCNNode(geometry: fluorineAtom())
-        fluorineNode.position = SCNVector3Make(-6, 0, 0)
+        fluorineNode.position = SCNVector3Make(-2, 8, 0)
         atomsNode.addChildNode(fluorineNode)
         
+        let galliumNode = SCNNode(geometry: galliumAtom())
+        galliumNode.position = SCNVector3Make(+2, 8, 0)
+        atomsNode.addChildNode(galliumNode)
+        
+        let goldNode = SCNNode(geometry: goldAtom())
+        goldNode.position = SCNVector3Make(+6, 8, 0)
+        atomsNode.addChildNode(goldNode)
+        
+        let helliumNode = SCNNode(geometry: helliumAtom())
+        helliumNode.position = SCNVector3Make(+10, 8, 0)
+        atomsNode.addChildNode(helliumNode)
+        
         let hydrogenNode = SCNNode(geometry: hydrogenAtom())
-        hydrogenNode.position = SCNVector3Make(-2, 0, 0)
+        hydrogenNode.position = SCNVector3Make(-10, 4, 0)
         atomsNode.addChildNode(hydrogenNode)
+        
+        let indiumNode = SCNNode(geometry: indiumAtom())
+        indiumNode.position = SCNVector3Make(-6, 4, 0)
+        atomsNode.addChildNode(indiumNode)
+        
+        let iodineNode = SCNNode(geometry: iodineAtom())
+        iodineNode.position = SCNVector3Make(-2, 4, 0)
+        atomsNode.addChildNode(iodineNode)
+        
+        let kryptonNode = SCNNode(geometry: kryptonAtom())
+        kryptonNode.position = SCNVector3Make( 2, 4, 0)
+        atomsNode.addChildNode(kryptonNode)
+        
+        let leadNode = SCNNode(geometry: leadAtom())
+        leadNode.position = SCNVector3Make(+6, 4, 0)
+        atomsNode.addChildNode(leadNode)
+        
+        let lithiumNode = SCNNode(geometry: lithiumAtom())
+        lithiumNode.position = SCNVector3Make(+10, 4, 0)
+        atomsNode.addChildNode(lithiumNode)
+        
+        let magnesiumNode = SCNNode(geometry: magnesiumAtom())
+        magnesiumNode.position = SCNVector3Make(-10, 0, 0)
+        atomsNode.addChildNode(magnesiumNode)
+        
+        let mercuryNode = SCNNode(geometry: mercuryAtom())
+        mercuryNode.position = SCNVector3Make(-6, 0, 0)
+        atomsNode.addChildNode(mercuryNode)
+        
+        let neonNode = SCNNode(geometry: neonAtom())
+        neonNode.position = SCNVector3Make(-2, 0, 0)
+        atomsNode.addChildNode(neonNode)
+        
+        let nickleNode = SCNNode(geometry: nickleAtom())
+        nickleNode.position = SCNVector3Make(+2, 0, 0)
+        atomsNode.addChildNode(nickleNode)
         
         let nitrogenNode = SCNNode(geometry: nitrogenAtom())
         nitrogenNode.position = SCNVector3Make(+2, 0, 0)
@@ -268,9 +353,66 @@ class Atoms {
         oxygenNode.position = SCNVector3Make(+6, 0, 0)
         atomsNode.addChildNode(oxygenNode)
         
+        let palladiumNode = SCNNode(geometry: palladiumAtom())
+        palladiumNode.position = SCNVector3Make(+10, 0, 0)
+        atomsNode.addChildNode(palladiumNode)
+        
         let phosphorusNode = SCNNode(geometry: phosphorusAtom())
-        phosphorusNode.position = SCNVector3Make(+10, 0, 0)
+        phosphorusNode.position = SCNVector3Make(-8, -4, 0)
         atomsNode.addChildNode(phosphorusNode)
+        
+        let platinumNode = SCNNode(geometry: platinumAtom())
+        platinumNode.position = SCNVector3Make(10, -12, 0)
+        atomsNode.addChildNode(platinumNode)
+        
+        let potassiumNode = SCNNode(geometry: potassiumAtom())
+        potassiumNode.position = SCNVector3Make(-2, -4.5, 0)
+        atomsNode.addChildNode(potassiumNode)
+        potassiumNode.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX( 0, y: CGFloat(M_PI), z: 0, duration: 6)))
+        
+        let seleniumNode = SCNNode(geometry: seleniumAtom())
+        seleniumNode.position = SCNVector3Make( 2, -12, 0)
+        atomsNode.addChildNode(seleniumNode)
+        
+        let siliconNode = SCNNode(geometry: siliconAtom())
+        siliconNode.position = SCNVector3Make(+4, -4, 0)
+        atomsNode.addChildNode(siliconNode)
+        
+        let silverNode = SCNNode(geometry: silverAtom())
+        silverNode.position = SCNVector3Make(+10, -4, 0)
+        atomsNode.addChildNode(silverNode)
+        
+        let sodiumNode = SCNNode(geometry: sodiumAtom())
+        sodiumNode.position = SCNVector3Make(-10, -8, 0)
+        atomsNode.addChildNode(sodiumNode)
+        
+        let sulfurNode = SCNNode(geometry: sulfurAtom())
+        sulfurNode.position = SCNVector3Make(-5.5, -8, 0)
+        atomsNode.addChildNode(sulfurNode)
+        
+        let telluriumNode = SCNNode(geometry: telluriumAtom())
+        telluriumNode.position = SCNVector3Make(-8, -12, 0)
+        atomsNode.addChildNode(telluriumNode)
+        
+        let thalliumNode = SCNNode(geometry: thalliumAtom())
+        thalliumNode.position = SCNVector3Make( 1.8, -7.8, 0)
+        atomsNode.addChildNode(thalliumNode)
+        
+        let tinNode = SCNNode(geometry: tinAtom())
+        tinNode.position = SCNVector3Make(+6, -8, 0)
+        atomsNode.addChildNode(tinNode)
+        
+        let uraniumNode = SCNNode(geometry: uraniumAtom())
+        uraniumNode.position = SCNVector3Make(+10, -8, 0)
+        atomsNode.addChildNode(uraniumNode)
+        
+        let xenonNode = SCNNode(geometry: xenonAtom())
+        xenonNode.position = SCNVector3Make(-2.5, -11, 0)
+        atomsNode.addChildNode(xenonNode)
+        
+        let zincNode = SCNNode(geometry: zincAtom())
+        zincNode.position = SCNVector3Make(+6, -12, 0)
+        atomsNode.addChildNode(zincNode)
         
         return atomsNode
     }

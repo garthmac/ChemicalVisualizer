@@ -15,11 +15,6 @@ Asset Credits
 -------------------------------------------------
 
 Van_der_Waals_radius:
+http://periodictable.com/Properties/A/VanDerWaalsRadius.an.html
 https://en.wikipedia.org/wiki/Van_der_Waals_radius
 https://en.wikipedia.org/wiki/CPK_coloring
-
-png images:
-http://www.123freevectors.com/
-
-youtube clip converter:
-http://www.clipconverter.cc

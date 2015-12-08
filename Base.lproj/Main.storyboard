@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,62 +19,110 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" loops="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AR-9S-R7o">
-                                <rect key="frame" x="0.0" y="84" width="600" height="460"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="480"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                             </sceneKitView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geometry" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="560" translatesAutoresizingMaskIntoConstraints="NO" id="ipJ-sd-2Tw">
-                                <rect key="frame" x="20" y="30" width="560" height="21"/>
+                                <rect key="frame" x="10" y="30" width="580" height="21"/>
                                 <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-yi-L9M">
-                                <rect key="frame" x="20" y="552" width="560" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-0K-OcT" userLabel="topSegCtrl">
+                                <rect key="frame" x="10" y="474" width="580" height="29"/>
                                 <animations/>
                                 <segments>
                                     <segment title="Atoms"/>
-                                    <segment title="C6H6"/>
                                     <segment title="Bacteria"/>
-                                    <segment title="CH4"/>
-                                    <segment title="P4"/>
-                                    <segment title="PTFE"/>
+                                    <segment title="Benzene"/>
                                     <segment title="Caffeine"/>
                                     <segment title="Ethanol"/>
-                                    <segment title="Advil"/>
-                                    <segment title="Roundup"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="segmentValueChanged:" destination="kQC-t8-k2Y" eventType="valueChanged" id="bgy-1I-9d3"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CzS-OC-Pc7" userLabel="midSegCtrl">
+                                <rect key="frame" x="10" y="504" width="580" height="29"/>
+                                <animations/>
+                                <segments>
+                                    <segment title="Ethylamine"/>
+                                    <segment title="Fructose"/>
+                                    <segment title="Glyphosate"/>
+                                    <segment title="Ibuprofen"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="segmentValueChanged:" destination="kQC-t8-k2Y" eventType="valueChanged" id="XEp-ss-irM"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-yi-L9M" userLabel="mid2SegCtrl">
+                                <rect key="frame" x="10" y="534" width="580" height="29"/>
+                                <animations/>
+                                <segments>
+                                    <segment title="Hydrogen peroxide"/>
+                                    <segment title="Isooctane"/>
+                                    <segment title="Methane"/>
+                                    <segment title="PTFE"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="segmentValueChanged:" destination="kQC-t8-k2Y" eventType="valueChanged" id="YmU-ag-O9d"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jQs-Hr-hxl" userLabel="lastSegCtrl">
+                                <rect key="frame" x="10" y="564" width="580" height="29"/>
+                                <animations/>
+                                <segments>
+                                    <segment title="Phosphoric acid"/>
+                                    <segment title="Pyrazine"/>
+                                    <segment title="Sodium triphosphate"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="segmentValueChanged:" destination="kQC-t8-k2Y" eventType="valueChanged" id="FDB-YB-bmL"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Rd9-yi-L9M" firstAttribute="top" secondItem="6AR-9S-R7o" secondAttribute="bottom" constant="8" symbolic="YES" id="4sZ-DA-0im"/>
+                            <constraint firstItem="CzS-OC-Pc7" firstAttribute="centerX" secondItem="Rd9-yi-L9M" secondAttribute="centerX" id="43B-1F-NGR"/>
+                            <constraint firstItem="CzS-OC-Pc7" firstAttribute="width" secondItem="Rd9-yi-L9M" secondAttribute="width" id="4fr-f2-B41"/>
+                            <constraint firstItem="770-eV-Tev" firstAttribute="top" secondItem="jQs-Hr-hxl" secondAttribute="bottom" constant="8" symbolic="YES" id="65Y-cp-Nag"/>
                             <constraint firstItem="6AR-9S-R7o" firstAttribute="leading" secondItem="CvP-vF-jX7" secondAttribute="leading" id="6XU-Yf-fNt"/>
-                            <constraint firstItem="6AR-9S-R7o" firstAttribute="top" secondItem="ipJ-sd-2Tw" secondAttribute="bottom" constant="8" symbolic="YES" id="CFe-Ha-Ktq"/>
+                            <constraint firstItem="Rd9-yi-L9M" firstAttribute="top" secondItem="CzS-OC-Pc7" secondAttribute="bottom" constant="2" id="8bX-b3-W1B"/>
+                            <constraint firstItem="jQs-Hr-hxl" firstAttribute="top" secondItem="6AR-9S-R7o" secondAttribute="bottom" constant="64" id="95V-k0-CLa"/>
+                            <constraint firstItem="CzS-OC-Pc7" firstAttribute="top" secondItem="eFv-0K-OcT" secondAttribute="bottom" constant="2" id="Bki-4Y-Bpg"/>
+                            <constraint firstItem="ipJ-sd-2Tw" firstAttribute="leading" secondItem="eFv-0K-OcT" secondAttribute="leading" id="K17-pO-cTm"/>
                             <constraint firstItem="ipJ-sd-2Tw" firstAttribute="top" secondItem="hYx-gu-9hy" secondAttribute="bottom" constant="10" id="K9W-1T-Wes"/>
-                            <constraint firstAttribute="bottom" secondItem="Rd9-yi-L9M" secondAttribute="bottom" constant="20" symbolic="YES" id="MkZ-j8-9Qz"/>
-                            <constraint firstItem="ipJ-sd-2Tw" firstAttribute="leading" secondItem="CvP-vF-jX7" secondAttribute="leading" constant="20" symbolic="YES" id="R3M-4W-4tX"/>
-                            <constraint firstItem="ipJ-sd-2Tw" firstAttribute="leading" secondItem="Rd9-yi-L9M" secondAttribute="leading" id="a5u-QQ-NIQ"/>
+                            <constraint firstItem="ipJ-sd-2Tw" firstAttribute="trailing" secondItem="eFv-0K-OcT" secondAttribute="trailing" id="MUA-fu-Ohv"/>
+                            <constraint firstItem="eFv-0K-OcT" firstAttribute="width" secondItem="CzS-OC-Pc7" secondAttribute="width" id="NjS-Fc-Icm"/>
+                            <constraint firstItem="eFv-0K-OcT" firstAttribute="height" secondItem="CzS-OC-Pc7" secondAttribute="height" id="No8-CV-LTd"/>
+                            <constraint firstItem="jQs-Hr-hxl" firstAttribute="height" secondItem="Rd9-yi-L9M" secondAttribute="height" id="Oup-AR-S8K"/>
+                            <constraint firstItem="CzS-OC-Pc7" firstAttribute="height" secondItem="Rd9-yi-L9M" secondAttribute="height" id="R7P-U2-2OR"/>
+                            <constraint firstItem="eFv-0K-OcT" firstAttribute="centerX" secondItem="CzS-OC-Pc7" secondAttribute="centerX" id="Vnv-CL-KHu"/>
+                            <constraint firstItem="jQs-Hr-hxl" firstAttribute="centerX" secondItem="Rd9-yi-L9M" secondAttribute="centerX" id="XWW-th-LoX"/>
+                            <constraint firstItem="jQs-Hr-hxl" firstAttribute="width" secondItem="Rd9-yi-L9M" secondAttribute="width" id="ZOO-LW-EGV"/>
+                            <constraint firstItem="ipJ-sd-2Tw" firstAttribute="centerX" secondItem="CvP-vF-jX7" secondAttribute="centerX" id="aRH-qn-rGP"/>
                             <constraint firstAttribute="centerX" secondItem="6AR-9S-R7o" secondAttribute="centerX" id="jD4-LS-02o"/>
-                            <constraint firstAttribute="trailing" secondItem="ipJ-sd-2Tw" secondAttribute="trailing" constant="20" symbolic="YES" id="kNc-xn-k7s"/>
-                            <constraint firstItem="6AR-9S-R7o" firstAttribute="top" secondItem="hYx-gu-9hy" secondAttribute="bottom" constant="64" id="tbc-TB-pmr"/>
-                            <constraint firstItem="ipJ-sd-2Tw" firstAttribute="trailing" secondItem="Rd9-yi-L9M" secondAttribute="trailing" id="tdH-Do-4Df"/>
+                            <constraint firstItem="eFv-0K-OcT" firstAttribute="leading" secondItem="CvP-vF-jX7" secondAttribute="leadingMargin" constant="-10" id="pJ7-vT-Z7o"/>
+                            <constraint firstItem="jQs-Hr-hxl" firstAttribute="top" secondItem="Rd9-yi-L9M" secondAttribute="bottom" constant="2" id="sp9-XX-CVA"/>
+                            <constraint firstItem="6AR-9S-R7o" firstAttribute="top" secondItem="hYx-gu-9hy" secondAttribute="bottom" id="tbc-TB-pmr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eFv-0K-OcT" secondAttribute="trailing" constant="-10" id="vE0-De-Nuc"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="CFe-Ha-Ktq"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomSegControl" destination="jQs-Hr-hxl" id="ACH-Ml-pYG"/>
                         <outlet property="geometryLabel" destination="ipJ-sd-2Tw" id="Lwx-rS-myS"/>
                         <outlet property="sceneView" destination="6AR-9S-R7o" id="iDf-fE-4hz"/>
+                        <outlet property="secondSegControl" destination="CzS-OC-Pc7" id="aUN-0r-bei"/>
+                        <outlet property="thirdSegControl" destination="Rd9-yi-L9M" id="cs5-UI-EAP"/>
+                        <outlet property="topSegControl" destination="eFv-0K-OcT" id="1re-0u-3yV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCr-kA-UFr" userLabel="First Responder" sceneMemberID="firstResponder"/>

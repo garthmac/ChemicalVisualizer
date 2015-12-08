@@ -13,6 +13,10 @@ import SceneKit
 class ViewController: UIViewController {
   @IBOutlet weak var geometryLabel: UILabel!
   @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var topSegControl: UISegmentedControl!
+    @IBOutlet weak var secondSegControl: UISegmentedControl!
+    @IBOutlet weak var thirdSegControl: UISegmentedControl!
+    @IBOutlet weak var bottomSegControl: UISegmentedControl!
     // Geometry
     var geometryNode: SCNNode = SCNNode()
     //if you navigate your scene with the default camera controls (rotation, specifically), you’ll notice an odd effect: you might expect the box to rotate and the lighting to stay in place but, in fact, it’s actually the camera rotating around the scene.
@@ -29,6 +33,9 @@ class ViewController: UIViewController {
     geometryLabel.text = "Atoms\n"
     geometryNode = Atoms.allAtoms()
     sceneView.scene!.rootNode.addChildNode(geometryNode)
+    secondSegControl.selectedSegmentIndex = -1
+    thirdSegControl.selectedSegmentIndex = -1
+    bottomSegControl.selectedSegmentIndex = -1
   }
     // MARK: Scene
     func sceneSetup() {
@@ -80,37 +87,80 @@ class ViewController: UIViewController {
   @IBAction func segmentValueChanged(sender: UISegmentedControl) {
     geometryNode.removeFromParentNode()
     currentAngle = 0.0
-    switch sender.selectedSegmentIndex {
+    var segIndex = 0
+    if sender == bottomSegControl {
+        topSegControl.selectedSegmentIndex = -1
+        secondSegControl.selectedSegmentIndex = -1
+        thirdSegControl.selectedSegmentIndex = -1
+        segIndex = topSegControl.numberOfSegments + secondSegControl.numberOfSegments + thirdSegControl.numberOfSegments + sender.selectedSegmentIndex
+    } else if sender == thirdSegControl {
+        topSegControl.selectedSegmentIndex = -1
+        secondSegControl.selectedSegmentIndex = -1
+        bottomSegControl.selectedSegmentIndex = -1
+        segIndex = topSegControl.numberOfSegments + secondSegControl.numberOfSegments + sender.selectedSegmentIndex
+    } else if sender == secondSegControl {
+        topSegControl.selectedSegmentIndex = -1
+        thirdSegControl.selectedSegmentIndex = -1
+        bottomSegControl.selectedSegmentIndex = -1
+        segIndex = topSegControl.numberOfSegments + sender.selectedSegmentIndex
+    } else {  //top
+        thirdSegControl.selectedSegmentIndex = -1
+        secondSegControl.selectedSegmentIndex = -1
+        bottomSegControl.selectedSegmentIndex = -1
+        segIndex = sender.selectedSegmentIndex
+    }
+    switch segIndex {
     case 0:
-        geometryLabel.text = "Atoms\n"
+        geometryLabel.text = "Atoms"
         geometryNode = Atoms.allAtoms()
     case 1:
-        geometryLabel.text = "Benzene(ring)\nFormula: C6H6\nMolar mass: 78.11 g/mol\nDensity: 876.50 kg/m³\nBoiling point: 80.1 °C\nIUPAC ID: Benzene\nMelting point: 5.5 °C\nSoluble in: Water"
-        geometryNode = Molecules.benzeneMolecule()
-    case 2:
         geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da\nMonoisotopic mass: 194.032761 Da"
         geometryNode = Molecules.bacteriaMolecule()
+    case 2:
+        geometryLabel.text = "Benzene(aromatic hydrocarbon)\nFormula: C6H6\nMolar mass: 78.11 g/mol\nDensity: 876.50 kg/m³\nBoiling point: 80.1 °C\nIUPAC ID: Benzene\nMelting point: 5.5 °C\nSoluble in: Water"
+        geometryNode = Molecules.benzeneMolecule()
     case 3:
-        geometryLabel.text = "Methane(Natural Gas)\nFormula: CH4\nMolar mass: 16.04 g/mol\nBoiling point: -161.5 °C\nDensity: 0.66 kg/m³\nMelting point: -182 °C\nSoluble in: Diethyl ether, Water,\nMethanol, Benzene, Toluene,\nAcetone, Ethanol"
-        geometryNode = Molecules.methaneMolecule()
-    case 4:
-        geometryLabel.text = "Phosphorus"
-        geometryNode = Molecules.phosphorusMolecule()
-    case 5:
-        geometryLabel.text = "Polytetrafluoroethylene\n(DuPont Teflon)\nsynthetic fluoropolymer of\ntetrafluoroethylene\nFormula: (C2F4)n\nMelting point: 326.8 °C\nDensity: 2.20 g/cm³"
-        geometryNode = Molecules.ptfeMolecule()
-    case 6:
         geometryLabel.text = "Caffeine\nFormula: C8H10N4O2\nMelting point: 235 °C\nMolar mass: 194.19 g/mol\n1,3,7-Trimethylpurine-2,6-dione\nBoiling point: 178 °C\nDensity: 1.23 g/cm³"
         geometryNode = Molecules.caffeineMolecule()
-    case 7:
+    case 4:
         geometryLabel.text = "Ethanol\n(ethyl alcohol, drinking alcohol)\nFormula: C2H6O\nMolar mass: 46.06844 g/mol\nBoiling point: 78.37 °C\nDensity: 789.00 kg/m³\nMelting point: -114 °C\nVapor pressure: 5.95 kPa"
         geometryNode = Molecules.ethanolMolecule()
+    case 5:
+        geometryLabel.text = "Ethylaminel\n(CH₃CH₂NH₂)\ncolourless gas has a strong ammonia-like odor\nFormula: C2H7N\nDensity: 689.00 kg/m³\nMolar mass: 45.08 g/mol"
+        geometryNode = Molecules.ethylamineMolecule()
+    case 6:
+        geometryLabel.text = "Fructose(fruit sugar)\nFormula: C6H12O6\nMelting point: 103 °C\nBoiling point: 440 °C\nDensity: 1.69 g/cm³\nSoluble in: Water"
+        geometryNode = Molecules.fructoseMolecule()
+    case 7:
+        geometryLabel.text = "Glyphosate(Roundup)\nN-(phosphonomethyl)glycine\nChemical formula C3H8NO5P\nMolar mass 169.07 g·mol−1\nwhite crystalline powder\nDensity 1.704\nMelting point 184.5 °C\nBoiling Pt decomposes at 187 °C\nSolubility in water 1.01 g/100 mL"
+        geometryNode = Molecules.glyphosateMolecule()
     case 8:
         geometryLabel.text = "Ibuprofen(Advil)\nFormula: C13H18O2\nMolecular mass 206.29 g/mol\nBioavailability 87–100%(oral,rectal)\nProtein binding 98%\nMetabolism Hepatic\nOnset of action 30 min\nBiological half-life 1.3–3 h\nExcretion Urine(95%)"
         geometryNode = Molecules.ibuprofenMolecule()
     case 9:
-        geometryLabel.text = "Glyphosate(Monsanto Roundup)\nN-(phosphonomethyl)glycine\nChemical formula C3H8NO5P\nMolar mass 169.07 g·mol−1\nwhite crystalline powder\nDensity 1.704\nMelting point 184.5 °C\nBoiling Pt decomposes at 187 °C\nSolubility in water 1.01 g/100 mL"
-        geometryNode = Molecules.glyphosateMolecule()
+        geometryLabel.text = "Hydrogen peroxide(disinfectant)\nFormula: H2O2\nMolar mass: 34.0147 g/mol\nDensity: 1.45 g/cm³\nMelting point: -0.43 °C\nBoiling point: 150.2 °C"
+        geometryNode = Molecules.hydrogenPeroxideMolecule()
+    case 10:
+        geometryLabel.text = "Isooctane(gasoline)\nFormula (CH₃)₃CCH₂CH(CH₃)₂\ndefines 100 points on octane rating scale\nDensity: 690.00 kg/m³\nBoiling point: 99 °C"
+        geometryNode = Molecules.isooctaneMolecule()
+    case 11:
+        geometryLabel.text = "Methane(natural gas)\nFormula: CH4\nMolar mass: 16.04 g/mol\nBoiling point: -161.5 °C\nDensity: 0.66 kg/m³\nMelting point: -182 °C\nSoluble in: Diethyl ether, Water,\nMethanol, Benzene, Toluene,\nAcetone, Ethanol"
+        geometryNode = Molecules.methaneMolecule()
+    case 12:
+        geometryLabel.text = "Polytetrafluoroethylene\n(Teflon)\nsynthetic fluoropolymer of\ntetrafluoroethylene\nFormula: (C2F4)n\nMelting point: 326.8 °C\nDensity: 2.20 g/cm³"
+        geometryNode = Molecules.ptfeMolecule()
+    case 13:
+        geometryLabel.text = "Phosphoric acid(mineral acid)\nFormula: H3PO4\nMolar mass: 98 g/mol\nDensity: 1.89 g/cm³\nBoiling point: 158 °C\nMelting point: 42.35 °C\nSoluble in: Water"
+        geometryNode = Molecules.phosphoricAcidMolecule()
+    case 14:
+        geometryLabel.text = "Pyrazine\n(antitumor, antibiotic and diuretic)\nFormula: C4H4N2\nMolar mass: 80.09 g/mol\nDensity: 1.03 g/cm³\nBoiling point: 115 °C\nMelting point: 52 °C"
+        geometryNode = Molecules.pyrazineMolecule()
+    case 15:
+        geometryLabel.text = "Sodium triphosphate(detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
+        geometryNode = Molecules.sodiumTriphosphateMolecule()
+//    case 16:
+//        geometryLabel.text = "Terpinen-4-ol\n(antimicrobial and antifungal-tea tree oil)\nChemical formula\nC10H18O\nMolar mass	154.25 g·mol−1"        //(mouth wash=ZnCl2/shampo=NaCl2)"
+//        geometryNode = Molecules.ptfeMolecule()  //couldn't get rid of 4H
     default:
         break
     }
