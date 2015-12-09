@@ -21,7 +21,7 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" loops="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AR-9S-R7o">
                                 <rect key="frame" x="0.0" y="20" width="600" height="480"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </sceneKitView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geometry" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="560" translatesAutoresizingMaskIntoConstraints="NO" id="ipJ-sd-2Tw">
                                 <rect key="frame" x="10" y="30" width="580" height="21"/>
@@ -50,7 +50,7 @@
                                 <rect key="frame" x="10" y="504" width="580" height="29"/>
                                 <animations/>
                                 <segments>
-                                    <segment title="Ethylamine"/>
+                                    <segment title="Enprofylline"/>
                                     <segment title="Fructose"/>
                                     <segment title="Glyphosate"/>
                                     <segment title="Ibuprofen"/>
@@ -89,7 +89,7 @@
                             </segmentedControl>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="CzS-OC-Pc7" firstAttribute="centerX" secondItem="Rd9-yi-L9M" secondAttribute="centerX" id="43B-1F-NGR"/>
                             <constraint firstItem="CzS-OC-Pc7" firstAttribute="width" secondItem="Rd9-yi-L9M" secondAttribute="width" id="4fr-f2-B41"/>

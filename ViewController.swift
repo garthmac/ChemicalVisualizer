@@ -25,17 +25,17 @@ class ViewController: UIViewController {
     //once you have more complex models with multiple geometry sources, it’ll be much easier to manage them as a single node – hence the addition of geometryNode. Furthermore, currentAngle will help modify the y-axis rotation of geometryNode exclusively, leaving the rest of your scene nodes untouched...see panGesture
   // MARK: Lifecycle
   override func viewDidLoad() {
-      super.viewDidLoad()
+    super.viewDidLoad()
+    secondSegControl.selectedSegmentIndex = -1
+    thirdSegControl.selectedSegmentIndex = -1
+    bottomSegControl.selectedSegmentIndex = -1
   }
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     sceneSetup()
-    geometryLabel.text = "Atoms\n"
+    geometryLabel.text = "Atoms"
     geometryNode = Atoms.allAtoms()
     sceneView.scene!.rootNode.addChildNode(geometryNode)
-    secondSegControl.selectedSegmentIndex = -1
-    thirdSegControl.selectedSegmentIndex = -1
-    bottomSegControl.selectedSegmentIndex = -1
   }
     // MARK: Scene
     func sceneSetup() {
@@ -74,13 +74,15 @@ class ViewController: UIViewController {
 //        sceneView.allowsCameraControl = true  ****used initially to see first node
     }
     func panGesture(sender: UIPanGestureRecognizer) {  //Whenever sceneView detects a pan gesture, this function will be called, and it transforms the gesture’s x-axis translation to a y-axis rotation on the geometry node (1 pixel = 1 degree)
-        let translation = sender.translationInView(sender.view!)
-        var newAngle = (Float)(translation.x)*(Float)(M_PI)/180.0
-        newAngle += currentAngle
-        geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 0, 1, 0)  //you modify the transform property of geometryNode by creating a new rotation matrix, but you could also modify its rotation property with a rotation vector. A transformation matrix is better because you can easily expand it to include translation and scale.
-        //***full 3D...http://www.raywenderlich.com/50398/opengl-es-transformations-gestures
-        if(sender.state == UIGestureRecognizerState.Ended) {
-            currentAngle = newAngle
+        if geometryLabel.text == "Atoms" {
+            let translation = sender.translationInView(sender.view!)
+            var newAngle = (Float)(translation.x)*(Float)(M_PI)/180.0
+            newAngle += currentAngle
+            geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 0, 1, 0)  //you modify the transform property of geometryNode by creating a new rotation matrix, but you could also modify its rotation property with a rotation vector. A transformation matrix is better because you can easily expand it to include translation and scale.
+            //***full 3D...http://www.raywenderlich.com/50398/opengl-es-transformations-gestures
+            if(sender.state == UIGestureRecognizerState.Ended) {
+                currentAngle = newAngle
+            }
         }
     }
   // MARK: IBActions
@@ -114,55 +116,64 @@ class ViewController: UIViewController {
         geometryLabel.text = "Atoms"
         geometryNode = Atoms.allAtoms()
     case 1:
-        geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da\nMonoisotopic mass: 194.032761 Da"
+        geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da"
         geometryNode = Molecules.bacteriaMolecule()
     case 2:
-        geometryLabel.text = "Benzene(aromatic hydrocarbon)\nFormula: C6H6\nMolar mass: 78.11 g/mol\nDensity: 876.50 kg/m³\nBoiling point: 80.1 °C\nIUPAC ID: Benzene\nMelting point: 5.5 °C\nSoluble in: Water"
+        geometryLabel.text = "Benzene (aromatic)\nFormula: C6H6\nMolar mass: 78.11 g/mol\nDensity: 876.50 kg/m³"
         geometryNode = Molecules.benzeneMolecule()
     case 3:
-        geometryLabel.text = "Caffeine\nFormula: C8H10N4O2\nMelting point: 235 °C\nMolar mass: 194.19 g/mol\n1,3,7-Trimethylpurine-2,6-dione\nBoiling point: 178 °C\nDensity: 1.23 g/cm³"
+        geometryLabel.text = "Caffeine\nFormula: C8H10N4O2\nMelting point: 235 °C\nMolar mass: 194.19 g/mol\nBoiling point: 178 °C\nDensity: 1.23 g/cm³"
         geometryNode = Molecules.caffeineMolecule()
     case 4:
-        geometryLabel.text = "Ethanol\n(ethyl alcohol, drinking alcohol)\nFormula: C2H6O\nMolar mass: 46.06844 g/mol\nBoiling point: 78.37 °C\nDensity: 789.00 kg/m³\nMelting point: -114 °C\nVapor pressure: 5.95 kPa"
+        geometryLabel.text = "Ethanol\n(ethyl alcohol, drinking alcohol)\nFormula: C2H6O\nMolar mass: 46.06844 g/mol\nBoiling point: 78.37 °C\nDensity: 789.00 kg/m³"
         geometryNode = Molecules.ethanolMolecule()
     case 5:
-        geometryLabel.text = "Ethylaminel\n(CH₃CH₂NH₂)\ncolourless gas has a strong ammonia-like odor\nFormula: C2H7N\nDensity: 689.00 kg/m³\nMolar mass: 45.08 g/mol"
-        geometryNode = Molecules.ethylamineMolecule()
+        geometryLabel.text = "Enprofylline (asthma treatment)\nxanthine derivative\nwhich acts as a bronchodilator\nMolar mass: 194.19 g/mol"
+        geometryNode = Molecules.enprofyllineMolecule()
     case 6:
-        geometryLabel.text = "Fructose(fruit sugar)\nFormula: C6H12O6\nMelting point: 103 °C\nBoiling point: 440 °C\nDensity: 1.69 g/cm³\nSoluble in: Water"
+        geometryLabel.text = "Fructose (fruit sugar)\nFormula: C6H12O6\nMelting point: 103 °C\nBoiling point: 440 °C\nDensity: 1.69 g/cm³"
         geometryNode = Molecules.fructoseMolecule()
     case 7:
-        geometryLabel.text = "Glyphosate(Roundup)\nN-(phosphonomethyl)glycine\nChemical formula C3H8NO5P\nMolar mass 169.07 g·mol−1\nwhite crystalline powder\nDensity 1.704\nMelting point 184.5 °C\nBoiling Pt decomposes at 187 °C\nSolubility in water 1.01 g/100 mL"
+        geometryLabel.text = "Glyphosate (Roundup)\nN-(phosphonomethyl)glycine\nChemical formula C3H8NO5P\nMolar mass 169.07 g·mol−1\nwhite crystalline powder\nDensity 1.704\nMelting point 184.5 °C"
         geometryNode = Molecules.glyphosateMolecule()
     case 8:
-        geometryLabel.text = "Ibuprofen(Advil)\nFormula: C13H18O2\nMolecular mass 206.29 g/mol\nBioavailability 87–100%(oral,rectal)\nProtein binding 98%\nMetabolism Hepatic\nOnset of action 30 min\nBiological half-life 1.3–3 h\nExcretion Urine(95%)"
+        geometryLabel.text = "Ibuprofen (Advil)\nFormula: C13H18O2\nMolecular mass 206.29 g/mol\nProtein binding 98%\nMetabolism Hepatic\nOnset of action 30 min"
         geometryNode = Molecules.ibuprofenMolecule()
     case 9:
-        geometryLabel.text = "Hydrogen peroxide(disinfectant)\nFormula: H2O2\nMolar mass: 34.0147 g/mol\nDensity: 1.45 g/cm³\nMelting point: -0.43 °C\nBoiling point: 150.2 °C"
+        geometryLabel.text = "Hydrogen peroxide (disinfectant)\nFormula: H2O2\nMolar mass: 34.0147 g/mol\nDensity: 1.45 g/cm³\nMelting point: -0.43 °C\nBoiling point: 150.2 °C"
         geometryNode = Molecules.hydrogenPeroxideMolecule()
     case 10:
-        geometryLabel.text = "Isooctane(gasoline)\nFormula (CH₃)₃CCH₂CH(CH₃)₂\ndefines 100 points on octane rating scale\nDensity: 690.00 kg/m³\nBoiling point: 99 °C"
+        geometryLabel.text = "Isooctane (gasoline)\nFormula (CH₃)₃CCH₂CH(CH₃)₂\non octane rating scale = 100 points\nDensity: 690.00 kg/m³\nBoiling point: 99 °C"
         geometryNode = Molecules.isooctaneMolecule()
     case 11:
-        geometryLabel.text = "Methane(natural gas)\nFormula: CH4\nMolar mass: 16.04 g/mol\nBoiling point: -161.5 °C\nDensity: 0.66 kg/m³\nMelting point: -182 °C\nSoluble in: Diethyl ether, Water,\nMethanol, Benzene, Toluene,\nAcetone, Ethanol"
+        geometryLabel.text = "Methane (natural gas)\nFormula: CH4\nMolar mass: 16.04 g/mol\nBoiling point: -161.5 °C\nDensity: 0.66 kg/m³\nMelting point: -182 °C"
         geometryNode = Molecules.methaneMolecule()
     case 12:
-        geometryLabel.text = "Polytetrafluoroethylene\n(Teflon)\nsynthetic fluoropolymer of\ntetrafluoroethylene\nFormula: (C2F4)n\nMelting point: 326.8 °C\nDensity: 2.20 g/cm³"
+        geometryLabel.text = "Polytetrafluoroethylene (Teflon)\nFormula: (C2F4)n\nsynthetic fluoropolymer\nof tetrafluoroethylene\nMelting point: 326.8 °C\nDensity: 2.20 g/cm³"
         geometryNode = Molecules.ptfeMolecule()
     case 13:
-        geometryLabel.text = "Phosphoric acid(mineral acid)\nFormula: H3PO4\nMolar mass: 98 g/mol\nDensity: 1.89 g/cm³\nBoiling point: 158 °C\nMelting point: 42.35 °C\nSoluble in: Water"
+        geometryLabel.text = "Phosphoric acid (mineral acid)\nFormula: H3PO4\nMolar mass: 98 g/mol\nDensity: 1.89 g/cm³\nBoiling point: 158 °C\nMelting point: 42.35 °C"
         geometryNode = Molecules.phosphoricAcidMolecule()
     case 14:
-        geometryLabel.text = "Pyrazine\n(antitumor, antibiotic and diuretic)\nFormula: C4H4N2\nMolar mass: 80.09 g/mol\nDensity: 1.03 g/cm³\nBoiling point: 115 °C\nMelting point: 52 °C"
+        geometryLabel.text = "Pyrazine (antitumor,antibiotic\nand diuretic) Formula: C4H4N2\nMolar mass: 80.09 g/mol\nDensity: 1.03 g/cm³\nBoiling point: 115 °C\nMelting point: 52 °C"
         geometryNode = Molecules.pyrazineMolecule()
     case 15:
-        geometryLabel.text = "Sodium triphosphate(detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
+        geometryLabel.text = "Sodium triphosphate (detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
         geometryNode = Molecules.sodiumTriphosphateMolecule()
 //    case 16:
 //        geometryLabel.text = "Terpinen-4-ol\n(antimicrobial and antifungal-tea tree oil)\nChemical formula\nC10H18O\nMolar mass	154.25 g·mol−1"        //(mouth wash=ZnCl2/shampo=NaCl2)"
 //        geometryNode = Molecules.ptfeMolecule()  //couldn't get rid of 4H
     default:
         break
+    }
+    if geometryLabel.text != "Atoms" {
+        if sceneView.frame.width < sceneView.frame.height {
+            geometryNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
+        } else {
+            let result = geometryLabel.text?.componentsSeparatedByString("\n")
+            geometryLabel.text = result![0] + " " + result![1] + "," + result![2]
+            geometryNode.scale = SCNVector3Make(2.4, 2.4, 2.4)
+        }
     }
     sceneView.scene!.rootNode.addChildNode(geometryNode)
   }
@@ -176,6 +187,13 @@ class ViewController: UIViewController {
   override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     sceneView.stop(nil)
+    if geometryLabel.text != "Atoms" {
+        if sceneView.frame.width > sceneView.frame.height {
+            geometryNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
+        } else {
+            geometryNode.scale = SCNVector3Make(2.4, 2.4, 2.4)
+        }
+    }
     sceneView.play(nil)
   }
 }

@@ -198,6 +198,10 @@ class Atoms {
         let siliconAtom = SCNSphere(radius: 2.10)
         siliconAtom.firstMaterial!.diffuse.contents = UIColor.crayons_turquoiseColor(1.0)
         siliconAtom.firstMaterial!.specular.contents = UIColor.whiteColor()
+        siliconAtom.segmentCount = 48;
+        siliconAtom.firstMaterial!.diffuse.contents = "3D.png"
+        //        potassiumAtom.firstMaterial!.specular.contents = "earth-specular.jpg"
+        siliconAtom.firstMaterial!.specular.intensity = 0.2
         return siliconAtom
     }
     class func silverAtom() -> SCNGeometry {  //47
@@ -358,7 +362,7 @@ class Atoms {
         atomsNode.addChildNode(palladiumNode)
         
         let phosphorusNode = SCNNode(geometry: phosphorusAtom())
-        phosphorusNode.position = SCNVector3Make(-8, -4, 0)
+        phosphorusNode.position = SCNVector3Make(-10, -8, 0)
         atomsNode.addChildNode(phosphorusNode)
         
         let platinumNode = SCNNode(geometry: platinumAtom())
@@ -383,7 +387,7 @@ class Atoms {
         atomsNode.addChildNode(silverNode)
         
         let sodiumNode = SCNNode(geometry: sodiumAtom())
-        sodiumNode.position = SCNVector3Make(-10, -8, 0)
+        sodiumNode.position = SCNVector3Make(-7.5, -4, 0)
         atomsNode.addChildNode(sodiumNode)
         
         let sulfurNode = SCNNode(geometry: sulfurAtom())
