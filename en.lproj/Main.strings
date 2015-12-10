@@ -1,0 +1,51 @@
+
+/* Class = "UISegmentedControl"; Jki-09-U1l.segmentTitles[0] = "Hydrogen peroxide"; ObjectID = "Jki-09-U1l"; */
+"Jki-09-U1l.segmentTitles[0]" = "Hydrogen peroxide";
+
+/* Class = "UISegmentedControl"; Jki-09-U1l.segmentTitles[1] = "Isooctane"; ObjectID = "Jki-09-U1l"; */
+"Jki-09-U1l.segmentTitles[1]" = "Isooctane";
+
+/* Class = "UISegmentedControl"; Jki-09-U1l.segmentTitles[2] = "Methane"; ObjectID = "Jki-09-U1l"; */
+"Jki-09-U1l.segmentTitles[2]" = "Methane";
+
+/* Class = "UISegmentedControl"; Jki-09-U1l.segmentTitles[3] = "PTFE"; ObjectID = "Jki-09-U1l"; */
+"Jki-09-U1l.segmentTitles[3]" = "PTFE";
+
+/* Class = "UILabel"; text = "Geometry"; ObjectID = "MyH-Mb-dSr"; */
+"MyH-Mb-dSr.text" = "Geometry";
+
+/* Class = "UISegmentedControl"; QJf-B5-oYh.segmentTitles[0] = "Phosphoric acid"; ObjectID = "QJf-B5-oYh"; */
+"QJf-B5-oYh.segmentTitles[0]" = "Phosphoric acid";
+
+/* Class = "UISegmentedControl"; QJf-B5-oYh.segmentTitles[1] = "Pyrazine"; ObjectID = "QJf-B5-oYh"; */
+"QJf-B5-oYh.segmentTitles[1]" = "Pyrazine";
+
+/* Class = "UISegmentedControl"; QJf-B5-oYh.segmentTitles[2] = "Sodium triphosphate"; ObjectID = "QJf-B5-oYh"; */
+"QJf-B5-oYh.segmentTitles[2]" = "Sodium triphosphate";
+
+/* Class = "UISegmentedControl"; R5x-2P-1Ow.segmentTitles[0] = "Atoms"; ObjectID = "R5x-2P-1Ow"; */
+"R5x-2P-1Ow.segmentTitles[0]" = "Atoms";
+
+/* Class = "UISegmentedControl"; R5x-2P-1Ow.segmentTitles[1] = "Terpinen4ol"; ObjectID = "R5x-2P-1Ow"; */
+"R5x-2P-1Ow.segmentTitles[1]" = "Terpinen4ol";
+
+/* Class = "UISegmentedControl"; R5x-2P-1Ow.segmentTitles[2] = "Benzene"; ObjectID = "R5x-2P-1Ow"; */
+"R5x-2P-1Ow.segmentTitles[2]" = "Benzene";
+
+/* Class = "UISegmentedControl"; R5x-2P-1Ow.segmentTitles[3] = "Caffeine"; ObjectID = "R5x-2P-1Ow"; */
+"R5x-2P-1Ow.segmentTitles[3]" = "Caffeine";
+
+/* Class = "UISegmentedControl"; R5x-2P-1Ow.segmentTitles[4] = "Ethanol"; ObjectID = "R5x-2P-1Ow"; */
+"R5x-2P-1Ow.segmentTitles[4]" = "Ethanol";
+
+/* Class = "UISegmentedControl"; qaP-2M-6RJ.segmentTitles[0] = "Enprofylline"; ObjectID = "qaP-2M-6RJ"; */
+"qaP-2M-6RJ.segmentTitles[0]" = "Enprofylline";
+
+/* Class = "UISegmentedControl"; qaP-2M-6RJ.segmentTitles[1] = "Fructose"; ObjectID = "qaP-2M-6RJ"; */
+"qaP-2M-6RJ.segmentTitles[1]" = "Fructose";
+
+/* Class = "UISegmentedControl"; qaP-2M-6RJ.segmentTitles[2] = "Glyphosate"; ObjectID = "qaP-2M-6RJ"; */
+"qaP-2M-6RJ.segmentTitles[2]" = "Glyphosate";
+
+/* Class = "UISegmentedControl"; qaP-2M-6RJ.segmentTitles[3] = "Ibuprofen"; ObjectID = "qaP-2M-6RJ"; */
+"qaP-2M-6RJ.segmentTitles[3]" = "Ibuprofen";

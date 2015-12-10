@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var secondSegControl: UISegmentedControl!
     @IBOutlet weak var thirdSegControl: UISegmentedControl!
     @IBOutlet weak var bottomSegControl: UISegmentedControl!
+    struct Constants {
+        static let AtomsTitle = "Van Der Waals Radius of the elements"
+        static let PeriodicTable = "https://en.wikipedia.org/wiki/Periodic_table_(large_cells)"
+    }
     // Geometry
     var geometryNode: SCNNode = SCNNode()
     //if you navigate your scene with the default camera controls (rotation, specifically), you’ll notice an odd effect: you might expect the box to rotate and the lighting to stay in place but, in fact, it’s actually the camera rotating around the scene.
@@ -33,7 +37,7 @@ class ViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     sceneSetup()
-    geometryLabel.text = "Atoms"
+    geometryLabel.text = Constants.AtomsTitle
     geometryNode = Atoms.allAtoms()
     sceneView.scene!.rootNode.addChildNode(geometryNode)
   }
@@ -57,31 +61,69 @@ class ViewController: UIViewController {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
 //        cameraNode.camera?.usesOrthographicProjection = true   //default projection type of a SCNCamera is perspective
-        cameraNode.position = SCNVector3Make(0, 0, 25)
+        cameraNode.position = SCNVector3Make(0, 0, 25)  //The only thing you need to define is its position, conveniently set right in front
         scene.rootNode.addChildNode(cameraNode)
-        //The default projection settings are spot-on for a basic scene, so you don’t have to modify the camera’s field of view, focal range or other properties. The only thing you need to define is its position, conveniently set right in front
-        
-//        let boxGeometry = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
-//        let boxNode = SCNNode(geometry: boxGeometry)
-//        scene.rootNode.addChildNode(boxNode)
-//        geometryNode = boxNode
+
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: "doubleTapGesture:")  //wikipedia atom
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        sceneView.addGestureRecognizer(doubleTapRecognizer)
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
         sceneView.addGestureRecognizer(panRecognizer)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "tapGesture:")   //wikipedia molecule
+        sceneView.addGestureRecognizer(tapRecognizer)
         
         sceneView.scene = scene
 //        sceneView.autoenablesDefaultLighting = true
 //        sceneView.allowsCameraControl = true  ****used initially to see first node
     }
-    func panGesture(sender: UIPanGestureRecognizer) {  //Whenever sceneView detects a pan gesture, this function will be called, and it transforms the gesture’s x-axis translation to a y-axis rotation on the geometry node (1 pixel = 1 degree)
-        if geometryLabel.text == "Atoms" {
-            let translation = sender.translationInView(sender.view!)
+    func panGesture(gesture: UIPanGestureRecognizer) {  //Whenever sceneView detects a pan gesture, this function will be called, and it transforms the gesture’s x-axis translation to a y-axis rotation on the geometry node (1 pixel = 1 degree)
+        if geometryLabel.text == Constants.AtomsTitle {
+            let translation = gesture.translationInView(gesture.view!)
             var newAngle = (Float)(translation.x)*(Float)(M_PI)/180.0
             newAngle += currentAngle
-            geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 0, 1, 0)  //you modify the transform property of geometryNode by creating a new rotation matrix, but you could also modify its rotation property with a rotation vector. A transformation matrix is better because you can easily expand it to include translation and scale.
-            //***full 3D...http://www.raywenderlich.com/50398/opengl-es-transformations-gestures
-            if(sender.state == UIGestureRecognizerState.Ended) {
+            geometryNode.transform = SCNMatrix4MakeRotation(newAngle, 0, 1, 0)  //you modify the transform property of geometryNode by creating a new rotation matrix, but you could also modify its rotation property with a rotation vector. A transformation matrix is better because you can easily expand it to include translation and scale.  ***full 3D...http://www.raywenderlich.com/50398/opengl-es-transformations-gestures
+            if (gesture.state == UIGestureRecognizerState.Ended) {
                 currentAngle = newAngle
+            }
+        } else {
+            if let url = NSURL(string: Constants.PeriodicTable) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+    }
+    func tapGesture(gesture: UITapGestureRecognizer) {
+        if gesture.numberOfTapsRequired == 1 {  //for molecules (although may still be abble to double tap an atom on rotating molecule)
+            let location = gesture.locationInView(gesture.view!)
+            //print(location)
+            if (gesture.state == UIGestureRecognizerState.Ended) {
+                let hits = self.sceneView.hitTest(location, options: nil)
+                if let tappedNode = hits.first?.node {
+                    let name = tappedNode.parentNode!.name
+                    if name != nil {
+                        if let url = NSURL(string: name!) {
+                            UIApplication.sharedApplication().openURL(url)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    func doubleTapGesture(gesture: UITapGestureRecognizer) {
+        if gesture.numberOfTapsRequired == 2 {   //for atoms
+            let location = gesture.locationInView(gesture.view!)
+            //print(location)
+            if (gesture.state == UIGestureRecognizerState.Ended) {
+                let hits = self.sceneView.hitTest(location, options: nil)
+                if let tappedNode = hits.first?.node {
+                    let name = tappedNode.geometry!.name
+                    if name != nil {
+                        if let url = NSURL(string: name!) {
+                            UIApplication.sharedApplication().openURL(url)
+                        }
+                    }
+                }
             }
         }
     }
@@ -113,11 +155,11 @@ class ViewController: UIViewController {
     }
     switch segIndex {
     case 0:
-        geometryLabel.text = "Atoms"
+        geometryLabel.text = Constants.AtomsTitle  // http://periodictable.com/Properties/A/VanDerWaalsRadius.an.html
         geometryNode = Atoms.allAtoms()
     case 1:
-        geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da"
-        geometryNode = Molecules.bacteriaMolecule()
+        geometryLabel.text = "Terpinen-4-ol (antimicrobial/antifungal\nprimary active ingredient of tea tree oil)\nChemical formula C10H18O\nMolar mass 154.25 g·mol−1"
+        geometryNode = Molecules.teaTreeOilMolecule()  //  https://en.wikipedia.org/wiki/Terpinen-4-ol
     case 2:
         geometryLabel.text = "Benzene (aromatic)\nFormula: C6H6\nMolar mass: 78.11 g/mol\nDensity: 876.50 kg/m³"
         geometryNode = Molecules.benzeneMolecule()
@@ -161,12 +203,15 @@ class ViewController: UIViewController {
         geometryLabel.text = "Sodium triphosphate (detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
         geometryNode = Molecules.sodiumTriphosphateMolecule()
 //    case 16:
-//        geometryLabel.text = "Terpinen-4-ol\n(antimicrobial and antifungal-tea tree oil)\nChemical formula\nC10H18O\nMolar mass	154.25 g·mol−1"        //(mouth wash=ZnCl2/shampo=NaCl2)"
-//        geometryNode = Molecules.ptfeMolecule()  //couldn't get rid of 4H
+//        geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da"        //(mouth wash=ZnCl2/shampo=NaCl2)
+//        geometryNode = Molecules.bacteriaMolecule()
+//    case 17:
+//        geometryLabel.text = "Tetrahydrocannabinol (THC), the psychoactive constituent of the cannabis plant"   // https://en.wikipedia.org/wiki/Tetrahydrocannabinol
+//        geometryNode = Molecules.ptfeMolecule()
     default:
         break
     }
-    if geometryLabel.text != "Atoms" {
+    if geometryLabel.text != Constants.AtomsTitle {
         if sceneView.frame.width < sceneView.frame.height {
             geometryNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
         } else {
@@ -187,7 +232,7 @@ class ViewController: UIViewController {
   override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     sceneView.stop(nil)
-    if geometryLabel.text != "Atoms" {
+    if geometryLabel.text != Constants.AtomsTitle {
         if sceneView.frame.width > sceneView.frame.height {
             geometryNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
         } else {

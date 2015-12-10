@@ -11,42 +11,44 @@ import Foundation
 import SceneKit
 
 class Molecules {
-    class func bacteriaMolecule() -> SCNNode {  // http://www.chemspider.com/Chemical-Structure.3628289.html
-        //20   Bacteria (Streptomyces cremeus NRRL 3241) Formula: C8H6N2O4
-        let bacteriaMolecule = SCNNode()
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.4697,  0.3029, -0.8452))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 1.6890,  0.3905,  0.3540))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 1.6678,  1.3574, -0.8016))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.4618,  1.4047, -1.3980))
-        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.0018, -0.7292, -1.1224))
-        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 2.5430,  1.9817, -1.0202))
-        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.0629,  2.1406, -2.1001))
-        _ = nodeWithAtom(Atoms.nitrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 2.4386, -0.7326,  0.3247))
-        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 3.4824, -0.6489, -0.3557))
-        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 2.1007, -1.7333,  1.0042))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.4696,  0.3029,  0.8452))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-1.6890,  0.3905, -0.3540))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-1.6678,  1.3574,  0.8016))
-        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.4619,  1.4047,  1.3980))
-        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.0016, -0.7292,  1.1225))
-        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-2.5430,  1.9817,  1.0201))
-        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.0629,  2.1406,  2.1001))
-        _ = nodeWithAtom(Atoms.nitrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-2.4386, -0.7327, -0.3247))
-        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-3.4823, -0.6489,  0.3557))
-        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-2.1006, -1.7334, -1.0041))
-        bacteriaMolecule.pivot = SCNMatrix4MakeRotation(Float(M_PI_2), 1, 0, 0)
-        let spin = CABasicAnimation(keyPath: "rotation")
-        // Use from-to to explicitly make a full rotation around y
-        spin.fromValue = NSValue(SCNVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
-        spin.toValue = NSValue(SCNVector4: SCNVector4(x: 0, y: 1, z: 0, w: Float(2 * M_PI)))
-        spin.duration = 3
-        spin.repeatCount = .infinity
-        bacteriaMolecule.addAnimation(spin, forKey: "spin around")
-        return bacteriaMolecule
-    }
+    class func wiki() -> String { return "https://en.wikipedia.org/wiki/" }
+//    class func bacteriaMolecule() -> SCNNode {  // http://www.chemspider.com/Chemical-Structure.3628289.html
+//        //20   Bacteria (Streptomyces cremeus NRRL 3241) Formula: C8H6N2O4
+//        let bacteriaMolecule = SCNNode()
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.4697,  0.3029, -0.8452))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 1.6890,  0.3905,  0.3540))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 1.6678,  1.3574, -0.8016))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.4618,  1.4047, -1.3980))
+//        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.0018, -0.7292, -1.1224))
+//        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 2.5430,  1.9817, -1.0202))
+//        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.0629,  2.1406, -2.1001))
+//        _ = nodeWithAtom(Atoms.nitrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 2.4386, -0.7326,  0.3247))
+//        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 3.4824, -0.6489, -0.3557))
+//        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 2.1007, -1.7333,  1.0042))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.4696,  0.3029,  0.8452))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-1.6890,  0.3905, -0.3540))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-1.6678,  1.3574,  0.8016))
+//        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.4619,  1.4047,  1.3980))
+//        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make( 0.0016, -0.7292,  1.1225))
+//        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-2.5430,  1.9817,  1.0201))
+//        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-0.0629,  2.1406,  2.1001))
+//        _ = nodeWithAtom(Atoms.nitrogenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-2.4386, -0.7327, -0.3247))
+//        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-3.4823, -0.6489,  0.3557))
+//        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: bacteriaMolecule, position: SCNVector3Make(-2.1006, -1.7334, -1.0041))
+//        bacteriaMolecule.pivot = SCNMatrix4MakeRotation(Float(M_PI_2), 1, 0, 0)
+//        let spin = CABasicAnimation(keyPath: "rotation")
+//        // Use from-to to explicitly make a full rotation around y
+//        spin.fromValue = NSValue(SCNVector4: SCNVector4(x: 0, y: 1, z: 0, w: 0))
+//        spin.toValue = NSValue(SCNVector4: SCNVector4(x: 0, y: 1, z: 0, w: Float(2 * M_PI)))
+//        spin.duration = 3
+//        spin.repeatCount = .infinity
+//        bacteriaMolecule.addAnimation(spin, forKey: "spin around")
+//        return bacteriaMolecule
+//    }
     class func benzeneMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Benzene
         //12  Benzene(aromatic hydrocarbon)\nFormula: C6H6
         let benzeneMolecule = SCNNode()
+        benzeneMolecule.name = wiki() + "Benzene"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: benzeneMolecule, position: SCNVector3Make(0, 1.40272, 0))
         _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: benzeneMolecule, position: SCNVector3Make(0, 2.49029, 0))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: benzeneMolecule, position: SCNVector3Make(-1.21479, 0.70136, 0))
@@ -87,6 +89,7 @@ class Molecules {
         //      24  C8H10N4O2  http://examples.yourdictionary.com/examples-of-organic-compound.html
         //Chemcraft/samples/MultXYZ/caffeine.xyz  http://www.chemcraftprog.com
         let caffeineMolecule = SCNNode()
+        caffeineMolecule.name = wiki() + "Caffeine"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: caffeineMolecule, position: SCNVector3Make(0.9163192029,    0.1723652799,    0.0000538537))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: caffeineMolecule, position: SCNVector3Make(0.3509083411,   -1.0602209706,    0.0000405782))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: caffeineMolecule, position: SCNVector3Make(-1.8294812579,   -0.1530826679,    0.0000937309))
@@ -124,6 +127,7 @@ class Molecules {
     class func ethanolMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Ethanol
         //9  drinking alcohol  Formula: C2H6O
         let ethanolMolecule = SCNNode()
+        ethanolMolecule.name = wiki() + "Ethanol"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: ethanolMolecule, position: SCNVector3Make(-0.70, 0.86, -0.36))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: ethanolMolecule, position: SCNVector3Make( 0.18, -0.18,  0.34))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: ethanolMolecule, position: SCNVector3Make( 0.12, -1.43, -0.34))
@@ -147,6 +151,7 @@ class Molecules {
         //        Enprofylline is a xanthine derivative used in the treatment of asthma, which acts as a bronchodilator Molar mass: 194.19 g/mol
         //24  Formula	C8H10N4O2
         let enprofyllineMolecule = SCNNode()
+        enprofyllineMolecule.name = wiki() + "Enprofylline"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: enprofyllineMolecule, position: SCNVector3Make( 0.48, 0.37, 0.05))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: enprofyllineMolecule, position: SCNVector3Make( 1.37, 1.41, 0.07))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: enprofyllineMolecule, position: SCNVector3Make(-1.38, 1.89, 0.06))
@@ -184,6 +189,7 @@ class Molecules {
     class func fructoseMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Fructose
         //24  Fructose(fruit sugar)\nFormula: C6H12O6
         let fructoseMolecule = SCNNode()
+        fructoseMolecule.name = wiki() + "Fructose"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: fructoseMolecule, position: SCNVector3Make(-0.80, -1.78, -0.2))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: fructoseMolecule, position: SCNVector3Make(-1.53, -0.66, -0.8))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: fructoseMolecule, position: SCNVector3Make(-1.67, -2.63,  0.52))
@@ -221,6 +227,7 @@ class Molecules {
     class func glyphosateMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Glyphosate    
         //18  (Monsanto Roundup)  Chemical formula C3H8NO5P
         let glyphosateMolecule = SCNNode()
+        glyphosateMolecule.name = wiki() + "Glyphosate"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: glyphosateMolecule, position: SCNVector3Make(-3.00,  0.68, -0.07))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: glyphosateMolecule, position: SCNVector3Make(-1.75,  0.52,  0.77))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: glyphosateMolecule, position: SCNVector3Make(-3.35, -0.28, -0.97))
@@ -252,6 +259,7 @@ class Molecules {
     class func hydrogenPeroxideMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Hydrogen_peroxide
         //4  Hydrogen peroxide(disinfectant)\nFormula: H2O2
         let hydrogenPeroxideMolecule = SCNNode()
+        hydrogenPeroxideMolecule.name = wiki() + "Hydrogen_peroxide"
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: hydrogenPeroxideMolecule, position: SCNVector3Make( -0.39, -0.62,  0.36))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: hydrogenPeroxideMolecule, position: SCNVector3Make(  0.39,  0.63,  0.24))
         _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: hydrogenPeroxideMolecule, position: SCNVector3Make( -0.05, -1.18, -0.34))
@@ -269,6 +277,7 @@ class Molecules {
     class func ibuprofenMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Ibuprofen  
         //33  Ibuprofen(Advil)  Formula: C13H18O2
         let ibuprofenMolecule = SCNNode()
+        ibuprofenMolecule.name = wiki() + "Ibuprofen"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: ibuprofenMolecule, position: SCNVector3Make( 1.05, -1.13, -0.25))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: ibuprofenMolecule, position: SCNVector3Make( 1.62,  0.17, -0.20))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: ibuprofenMolecule, position: SCNVector3Make(-0.31, -1.30, -0.59))
@@ -315,6 +324,7 @@ class Molecules {
     class func isooctaneMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/2,2,4-Trimethylpentane
         //26  Isooctane(gasoline)\nFormula (CH₃)₃CCH₂CH(CH₃)₂  C8H18
         let isooctaneMolecule = SCNNode()
+        isooctaneMolecule.name = wiki() + "2,2,4-Trimethylpentane"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: isooctaneMolecule, position: SCNVector3Make( 0.23,  2.06,  0.47))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: isooctaneMolecule, position: SCNVector3Make( 1.06,  0.85,  0.05))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: isooctaneMolecule, position: SCNVector3Make( 0.31, -0.02, -1.0))
@@ -354,6 +364,7 @@ class Molecules {
     class func methaneMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Methane
         //5  Methane(natural gas) Formula: CH4
         let methaneMolecule = SCNNode()
+        methaneMolecule.name = wiki() + "Methane"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: methaneMolecule, position: SCNVector3Make(0, 0, 0))
         _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: methaneMolecule, position: SCNVector3Make(0, 0, 1.089))
         _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: methaneMolecule, position: SCNVector3Make(1.026719, 0,-0.363))
@@ -378,6 +389,7 @@ class Molecules {
     class func ptfeMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Polytetrafluoroethylene
         //6  Polytetrafluoroethylene\n(Teflon) synthetic fluoropolymer of tetrafluoroethylene Formula: (C2F4)n
         let ptfeMolecule = SCNNode()
+        ptfeMolecule.name = wiki() + "Polytetrafluoroethylene"
         // 2 double bond Carbon + 4 Flourine repeating structure
         _ = nodeWithAtom(Atoms.fluorineAtom(), molecule: ptfeMolecule, position: SCNVector3Make( 0.79, -1.56, -0.25))
         _ = nodeWithAtom(Atoms.fluorineAtom(), molecule: ptfeMolecule, position: SCNVector3Make(-1.44, -0.99, -0.23))
@@ -398,6 +410,7 @@ class Molecules {
     class func phosphoricAcidMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Phosphoric_acid
         //8  Phosphoric acid(mineral acid)\nFormula: H3PO4
         let phosphoricAcidMolecule = SCNNode()
+        phosphoricAcidMolecule.name = wiki() + "Phosphoric_acid"
         _ = nodeWithAtom(Atoms.phosphorusAtom(), molecule: phosphoricAcidMolecule, position: SCNVector3Make( -0.07,  0.15,  0))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: phosphoricAcidMolecule, position: SCNVector3Make( 0.99,  1.22,  0.64))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: phosphoricAcidMolecule, position: SCNVector3Make(-1.13,  0.93, -0.99))
@@ -425,6 +438,7 @@ class Molecules {
     class func pyrazineMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Pyrazine
         //33  Pyrazine(antibiotic)\nFormula: C4H4N2
         let pyrazineMolecule = SCNNode()
+        pyrazineMolecule.name = wiki() + "Pyrazine"
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: pyrazineMolecule, position: SCNVector3Make( 1.21, -0.68,  0.02))
         _ = nodeWithAtom(Atoms.carbonAtom(), molecule: pyrazineMolecule, position: SCNVector3Make( 1.19,  0.71, -0.02))
         _ = nodeWithAtom(Atoms.nitrogenAtom(), molecule: pyrazineMolecule, position: SCNVector3Make( 0.01, -1.39,  0.04))
@@ -448,6 +462,7 @@ class Molecules {
     class func sodiumTriphosphateMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Sodium_triphosphate
         //18  Sodium triphosphate(detergent)\nFormula Na5P3O10
         let sodiumTriphosphateMolecule = SCNNode()
+        sodiumTriphosphateMolecule.name = wiki() + "Sodium_triphosphate"
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: sodiumTriphosphateMolecule, position: SCNVector3Make( 1.05, -1.13, -0.25))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: sodiumTriphosphateMolecule, position: SCNVector3Make( 1.62,  0.17, -0.20))
         _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: sodiumTriphosphateMolecule, position: SCNVector3Make(-0.31, -1.30, -0.59))
@@ -476,6 +491,50 @@ class Molecules {
         sodiumTriphosphateMolecule.addAnimation(spin, forKey: "spin around")
         return sodiumTriphosphateMolecule
     }
+    class func teaTreeOilMolecule() -> SCNNode {  // https://en.wikipedia.org/wiki/Terpinen-4-ol
+        //29  C10H18O Terpinen-4-ol is a terpene with a molecular weight of 154.249. It has an antibacterial and antifungal effect. It is considered the primary active ingredient of tea tree oil
+        let teaTreeOilMolecule = SCNNode()
+        teaTreeOilMolecule.name = wiki() + "Terpinen-4-ol"
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 0.56,  0.69,  0.19))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 1.33,  0.66, -0.13))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-0.78, -0.05,  1.05))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 1.56, -0.76, -0.57))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-0.51, -1.52,  0.65))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 0.71, -1.75, -0.23))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 2.76, -1.07, -1.43))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.66,  0.64, -0.03))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-3.02, -0.04, -0.22))
+        _ = nodeWithAtom(Atoms.carbonAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.90,  2.10,  0.36))
+        _ = nodeWithAtom(Atoms.oxygenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.47, -0.03,  2.30))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 0.38,  1.75,  1.47))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 1.17,  0.21,  1.98))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 2.31,  1.16,  0.02))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 0.76,  1.20, -0.92))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.41, -1.91,  0.12))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-0.37, -2.10,  1.59))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 0.92, -2.78, -0.60))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 3.70, -0.93, -0.85))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 2.76, -0.39, -2.30))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make( 2.72, -2.12, -1.79))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.13,  0.58, -1.01))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-3.50, -0.25,  0.76))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-2.89, -0.99, -0.79))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-3.70,  0.63, -0.80))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.56,  2.29,  1.40))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-2.99,  2.32,  0.29))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-1.34,  2.78, -0.32))
+        _ = nodeWithAtom(Atoms.hydrogenAtom(), molecule: teaTreeOilMolecule, position: SCNVector3Make(-2.24,  0.52,  2.16))
+        teaTreeOilMolecule.pivot = SCNMatrix4MakeRotation(Float(M_PI_2), 1, 0, 0)
+        let spin = CABasicAnimation(keyPath: "rotation")
+        // Use from-to to explicitly make a full rotation around y
+        spin.fromValue = NSValue(SCNVector4: SCNVector4(x: 1, y: 0, z: 0, w: 0))
+        spin.toValue = NSValue(SCNVector4: SCNVector4(x: 1, y: 0, z: 0, w: Float(2 * M_PI)))
+        spin.duration = 3
+        spin.repeatCount = .infinity
+        teaTreeOilMolecule.addAnimation(spin, forKey: "spin around")
+        return teaTreeOilMolecule
+    }
+
     class func nodeWithAtom(atom: SCNGeometry, molecule: SCNNode, position: SCNVector3) -> SCNNode {
         let node = SCNNode(geometry: atom)
         node.position = position
