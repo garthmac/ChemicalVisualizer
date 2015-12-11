@@ -534,7 +534,6 @@ class Molecules {
         teaTreeOilMolecule.addAnimation(spin, forKey: "spin around")
         return teaTreeOilMolecule
     }
-
     class func nodeWithAtom(atom: SCNGeometry, molecule: SCNNode, position: SCNVector3) -> SCNNode {
         let node = SCNNode(geometry: atom)
         node.position = position

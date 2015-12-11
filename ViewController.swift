@@ -18,9 +18,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var thirdSegControl: UISegmentedControl!
     @IBOutlet weak var bottomSegControl: UISegmentedControl!
     struct Constants {
-        static let AtomsTitle = "Van Der Waals Radius of the elements"
-        static let PeriodicTable = "https://en.wikipedia.org/wiki/Periodic_table_(large_cells)"
+        static let AtomsTitle = "Atoms - Van Der Waals Radius"
+        static let PeriodicTable = "http://periodictable.com/Properties/A/VanDerWaalsRadius.al.html"
+        static let DemoURL = "https://redblockblog.wordpress.com/marketing/"
+        static let ChemsketchURL = "http://www.chemteach.ac.nz/documents/chemed09/misc/chemsketch.pdf"
+        static let ChemSketch_GuideURL = "http://academic.pgcc.edu/psc/ChemSketch_Guide.pdf"
     }
+    let model = UIDevice.currentDevice().model
     // Geometry
     var geometryNode: SCNNode = SCNNode()
     //if you navigate your scene with the default camera controls (rotation, specifically), you’ll notice an odd effect: you might expect the box to rotate and the lighting to stay in place but, in fact, it’s actually the camera rotating around the scene.
@@ -93,35 +97,42 @@ class ViewController: UIViewController {
             }
         }
     }
-    func tapGesture(gesture: UITapGestureRecognizer) {
-        if gesture.numberOfTapsRequired == 1 {  //for molecules (although may still be abble to double tap an atom on rotating molecule)
+    var tap = UITapGestureRecognizer()
+    func tapStop(gesture: UITapGestureRecognizer, willDisable: Bool) {
+        tap = gesture
+        if willDisable {
+            gesture.enabled = false
+        } else {
+            gesture.enabled = true
+        }
+    }
+    func tapGesture(gesture: UITapGestureRecognizer) {   //for molecules (although may still be abble to double tap an atom on rotating molecule)
+        if gesture.numberOfTapsRequired == 1 {
             let location = gesture.locationInView(gesture.view!)
             //print(location)
-            if (gesture.state == UIGestureRecognizerState.Ended) {
-                let hits = self.sceneView.hitTest(location, options: nil)
-                if let tappedNode = hits.first?.node {
-                    let name = tappedNode.parentNode!.name
-                    if name != nil {
-                        if let url = NSURL(string: name!) {
-                            UIApplication.sharedApplication().openURL(url)
-                        }
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if let tappedNode = hits.first?.node {
+                let name = tappedNode.parentNode!.name
+                if name != nil {
+                    tappedNode.parentNode?.pauseAnimationForKey("spin around")  //removeAnimationForKey("spin around")
+                    tapStop(gesture, willDisable: true)
+                    if let url = NSURL(string: name!) {
+                        UIApplication.sharedApplication().openURL(url)
                     }
                 }
             }
         }
     }
-    func doubleTapGesture(gesture: UITapGestureRecognizer) {
-        if gesture.numberOfTapsRequired == 2 {   //for atoms
+    func doubleTapGesture(gesture: UITapGestureRecognizer) {    //for atoms
+        if gesture.numberOfTapsRequired == 2 {
             let location = gesture.locationInView(gesture.view!)
             //print(location)
-            if (gesture.state == UIGestureRecognizerState.Ended) {
-                let hits = self.sceneView.hitTest(location, options: nil)
-                if let tappedNode = hits.first?.node {
-                    let name = tappedNode.geometry!.name
-                    if name != nil {
-                        if let url = NSURL(string: name!) {
-                            UIApplication.sharedApplication().openURL(url)
-                        }
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if let tappedNode = hits.first?.node {
+                let name = tappedNode.geometry!.name
+                if name != nil {
+                    if let url = NSURL(string: name!) {
+                        UIApplication.sharedApplication().openURL(url)
                     }
                 }
             }
@@ -132,6 +143,9 @@ class ViewController: UIViewController {
     geometryNode.removeFromParentNode()
     currentAngle = 0.0
     var segIndex = 0
+    if !tap.enabled {
+        tap.enabled = true   //restart molecule singleTap
+    }
     if sender == bottomSegControl {
         topSegControl.selectedSegmentIndex = -1
         secondSegControl.selectedSegmentIndex = -1
@@ -202,6 +216,32 @@ class ViewController: UIViewController {
     case 15:
         geometryLabel.text = "Sodium triphosphate (detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
         geometryNode = Molecules.sodiumTriphosphateMolecule()
+    case 16:
+        geometryLabel.text = "\n \n "
+        // Create a 3D text SIMILAR TO A MOLECULE
+        geometryNode = SCNNode()
+        geometryNode.name = Constants.ChemsketchURL
+        let sky = SCNMaterial()
+        sky.diffuse.contents = UIImage(named: "RBGames.png")
+        let red = SCNMaterial()
+        red.diffuse.contents = UIColor.redColor()
+        let blue = SCNMaterial()
+        blue.diffuse.contents = UIColor.blueColor()
+        let myText = SCNText(string: "Ⓒhem 3D", extrusionDepth: 3)
+        myText.name = Constants.ChemSketch_GuideURL
+        myText.flatness = 0.1  //default 0.6
+        myText.font = UIFont(name: "Arial", size: 13)
+        //myText.chamferRadius = 1  //half extrusionDepth max
+        myText.materials = [sky, red, blue]  //see SCNText help
+        let childNode = SCNNode(geometry: myText)
+        childNode.position = SCNVector3(x: -8, y: 0, z: 0)
+        childNode.orientation = SCNQuaternion(x: 0, y: 0, z: 0.6, w: 0)
+        geometryNode.addChildNode(childNode)
+        //sceneView.scene?.background.contents = "RBGames.png"
+        if let url = NSURL(string: Constants.DemoURL) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        break
 //    case 16:
 //        geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da"        //(mouth wash=ZnCl2/shampo=NaCl2)
 //        geometryNode = Molecules.bacteriaMolecule()
