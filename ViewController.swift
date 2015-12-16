@@ -217,10 +217,10 @@ class ViewController: UIViewController {
         geometryLabel.text = "Sodium triphosphate (detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
         geometryNode = Molecules.sodiumTriphosphateMolecule()
     case 16:
-        geometryLabel.text = "\n \n "
+        geometryLabel.text = "\n \n "  //no title      //4. pan to open Van Der Waals page
         // Create a 3D text SIMILAR TO A MOLECULE
         geometryNode = SCNNode()
-        geometryNode.name = Constants.ChemsketchURL
+        geometryNode.name = Constants.ChemsketchURL    //2. single tap
         let sky = SCNMaterial()
         sky.diffuse.contents = UIImage(named: "RBGames.png")
         let red = SCNMaterial()
@@ -228,7 +228,7 @@ class ViewController: UIViewController {
         let blue = SCNMaterial()
         blue.diffuse.contents = UIColor.blueColor()
         let myText = SCNText(string: "Ⓒhem 3D", extrusionDepth: 3)
-        myText.name = Constants.ChemSketch_GuideURL
+        myText.name = Constants.ChemSketch_GuideURL     //3. double tap after single tap
         myText.flatness = 0.1  //default 0.6
         myText.font = UIFont(name: "Arial", size: 13)
         //myText.chamferRadius = 1  //half extrusionDepth max
@@ -239,15 +239,15 @@ class ViewController: UIViewController {
         geometryNode.addChildNode(childNode)
         //sceneView.scene?.background.contents = "RBGames.png"
         if let url = NSURL(string: Constants.DemoURL) {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.sharedApplication().openURL(url)   //1. opens first
         }
         break
 //    case 16:
 //        geometryLabel.text = "Bacteria\n(Streptomyces cremeus NRRL 3241)\nFormula: C8H6N2O4\nAverage mass: 194.144 Da"        //(mouth wash=ZnCl2/shampo=NaCl2)
-//        geometryNode = Molecules.bacteriaMolecule()
+//        geometryNode = Molecules.bacteriaMolecule()       zopiclone is chloropyridinoxotriazabicyclonona-trienylmethylpiper-azinecarboxylate (C17H17ClN6O3)
 //    case 17:
 //        geometryLabel.text = "Tetrahydrocannabinol (THC), the psychoactive constituent of the cannabis plant"   // https://en.wikipedia.org/wiki/Tetrahydrocannabinol
-//        geometryNode = Molecules.ptfeMolecule()
+//        geometryNode = Molecules.ptfeMolecule()           cd ~/.wine/drive_c/users/imac27/.wine/drive_c/Program\ Files/ACD2015FREE    wine CHEMSK.EXE
     default:
         break
     }
