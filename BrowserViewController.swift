@@ -56,6 +56,26 @@ class BrowserViewController: UIViewController, UIWebViewDelegate {
         if allowHTTP {
             dismissViewControllerAnimated(true, completion: nil)
         }
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "swipeLeft:")
+        swipeLeft.direction = .Left
+        webView.addGestureRecognizer(swipeLeft)
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
+        swipeRight.direction = .Right
+        webView.addGestureRecognizer(swipeRight)
+    }
+    func swipeLeft(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .Ended:
+            webView.goBack()
+        default: break
+        }
+    }
+    func swipeRight(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .Ended:
+            webView.goForward()
+        default: break
+        }
     }
     var allowHTTP = false
     // MARK: - UIWebView delegate
@@ -70,7 +90,4 @@ class BrowserViewController: UIViewController, UIWebViewDelegate {
             spinner.stopAnimating()
         }
     }
-    func sendRequest() {
-            }
-
 }
