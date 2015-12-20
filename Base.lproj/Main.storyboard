@@ -116,11 +116,70 @@
                         <outlet property="secondSegControl" destination="qaP-2M-6RJ" id="rFM-xW-yx1"/>
                         <outlet property="thirdSegControl" destination="Jki-09-U1l" id="Mnd-Zz-7ID"/>
                         <outlet property="topSegControl" destination="R5x-2P-1Ow" id="Zq0-La-EPN"/>
+                        <segue destination="ff2-1o-peo" kind="showDetail" identifier="Show URL" id="23V-Ad-fqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Rt-bj-gIc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-101" y="375"/>
+            <point key="canvasLocation" x="-104" y="375"/>
+        </scene>
+        <!--Browser View Controller-->
+        <scene sceneID="RG3-gV-x15">
+            <objects>
+                <viewController id="ff2-1o-peo" customClass="BrowserViewController" customModule="ChemicalVisualizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7EX-Ce-cq2"/>
+                        <viewControllerLayoutGuide type="bottom" id="6XQ-Gd-ktF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ea9-1b-CIL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l55-UF-Gc9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3a-jJ-YU7">
+                                <rect key="frame" x="484" y="15" width="112" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="◁Back to Chem3D">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="unwind:" destination="ff2-1o-peo" eventType="touchUpInside" id="0RS-Ml-a63"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="o6a-Dv-hKQ">
+                                <rect key="frame" x="282" y="282" width="37" height="37"/>
+                                <color key="color" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="l55-UF-Gc9" secondAttribute="trailing" constant="-20" id="8Nl-Wh-6le"/>
+                            <constraint firstItem="a3a-jJ-YU7" firstAttribute="trailing" secondItem="l55-UF-Gc9" secondAttribute="trailing" constant="-4" id="Cl1-1c-MIT"/>
+                            <constraint firstItem="6XQ-Gd-ktF" firstAttribute="top" secondItem="l55-UF-Gc9" secondAttribute="bottom" id="aG4-ol-jaD"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="l55-UF-Gc9" secondAttribute="leading" constant="20" id="aH4-4N-x3o"/>
+                            <constraint firstItem="l55-UF-Gc9" firstAttribute="top" secondItem="7EX-Ce-cq2" secondAttribute="bottom" constant="-20" id="dZ8-5R-Ijg"/>
+                            <constraint firstItem="l55-UF-Gc9" firstAttribute="top" secondItem="a3a-jJ-YU7" secondAttribute="top" constant="-15" id="dfz-oR-FLU"/>
+                            <constraint firstItem="o6a-Dv-hKQ" firstAttribute="centerX" secondItem="l55-UF-Gc9" secondAttribute="centerX" id="mzv-yF-3gs"/>
+                            <constraint firstItem="l55-UF-Gc9" firstAttribute="top" secondItem="a3a-jJ-YU7" secondAttribute="top" constant="-33" id="rgT-CN-UKa"/>
+                            <constraint firstItem="o6a-Dv-hKQ" firstAttribute="centerY" secondItem="l55-UF-Gc9" secondAttribute="centerY" id="tyK-HI-idn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="rgT-CN-UKa"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="spinner" destination="o6a-Dv-hKQ" id="4Gr-fW-7aJ"/>
+                        <outlet property="webView" destination="l55-UF-Gc9" id="hQh-EX-dEC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p9J-Yd-5g9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="597" y="375"/>
         </scene>
     </scenes>
 </document>

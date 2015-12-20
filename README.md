@@ -2,7 +2,7 @@
 
 No adverts; No In App Purchases; No Game Center - 3D for Educational USE
 
-Xcode 7.2 
+Xcode 7.2 uses SceneKit, CoreData, NSURLProtocol, WebKit
 
 Swift 2.2 - version 2.2 was made open source and made available under 
 the Apache License 2.0 on December 3, 2015, for Apple's platforms and Linux
@@ -27,6 +27,7 @@ used to acidify foods and beverages such as various colas and jams and in dentis
 and is a component of some herbs in traditional Chinese medicine
 - Sodium triphosphate produced on a large scale as a component of many domestic and industrial products, especially detergents
 
+added URL cache for offline use (allow arbitrary loads for marketing)
 
 Deployment Target iOS 9.0
 Base SDK = iOS 9.2
