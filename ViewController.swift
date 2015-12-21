@@ -10,13 +10,14 @@
 import UIKit
 import SceneKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var geometryLabel: UILabel!
     @IBOutlet weak var sceneView: SCNView!
     @IBOutlet weak var topSegControl: UISegmentedControl!
     @IBOutlet weak var secondSegControl: UISegmentedControl!
     @IBOutlet weak var thirdSegControl: UISegmentedControl!
     @IBOutlet weak var bottomSegControl: UISegmentedControl!
+    @IBOutlet weak var helpPickerView: UIPickerView!
     struct Constants {
         static let AtomsTitle = "Atoms - Van Der Waals Radius"
         static let PeriodicTable = "http://periodictable.com/Properties/A/VanDerWaalsRadius.al.html"
@@ -26,6 +27,42 @@ class ViewController: UIViewController {
         static let ShowURLSegue = "Show URL"
     }
     var url = ""
+    //MARK: - UIPickerViewDataSource
+    var pickerDataSourceHelp: [UIButton] { // a computed property instead of func
+        get {
+            return (0..<self.hints.count).map {
+                let button = UIButton(frame: CGRect(x: 0, y: 0, width: sceneView.bounds.width, height: 40))
+                button.titleLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+                button.titleLabel!.lineBreakMode = .ByWordWrapping
+                button.setTitle(self.hints[$0], forState: .Normal)
+                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                return button
+            }
+        }
+        set { self.pickerDataSourceHelp = newValue }
+    }
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1 } //number of wheels in the picker
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSourceHelp.count
+    }
+    //MARK: - UIPickerViewDelegate
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        if pickerView.tag > 0 {
+            return 45.0
+        }
+        return 70.0
+    }
+    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return sceneView.bounds.width
+    }
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView { //expensive
+        return pickerDataSourceHelp[row]
+    }
+    var selectedHintIndex = 0
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedHintIndex = row
+    }
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Constants.ShowURLSegue {
@@ -51,6 +88,8 @@ class ViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        helpPickerView.delegate = self
+        helpPickerView.dataSource = self
         secondSegControl.selectedSegmentIndex = -1
         thirdSegControl.selectedSegmentIndex = -1
         bottomSegControl.selectedSegmentIndex = -1
@@ -159,6 +198,7 @@ class ViewController: UIViewController {
     // MARK: IBActions
     @IBAction func segmentValueChanged(sender: UISegmentedControl) {
         geometryNode.removeFromParentNode()
+        helpPickerView.hidden = true
         currentAngle = 0.0
         var segIndex = 0
         if !tap.enabled {
@@ -235,7 +275,7 @@ class ViewController: UIViewController {
             geometryLabel.text = "Sodium triphosphate (detergent)\nFormula Na5P3O10\nMolar mass: 367.864 g/mol\nMelting point: 622 °C\nDensity: 2.52 g/cm³"
             geometryNode = Molecules.sodiumTriphosphateMolecule()
         case 16:
-            geometryLabel.text = "\n \n "  //no title      //4. pan to open Van Der Waals page
+            geometryLabel.text = ""  //no title      //4. pan to open Van Der Waals page
             // Create a 3D text SIMILAR TO A MOLECULE
             geometryNode = SCNNode()
             geometryNode.name = Constants.ChemsketchURL    //2. single tap
@@ -256,6 +296,7 @@ class ViewController: UIViewController {
             childNode.orientation = SCNQuaternion(x: 0, y: 0, z: 0.6, w: 0)
             geometryNode.addChildNode(childNode)
             //sceneView.scene?.background.contents = "RBGames.png"
+            helpPickerView.hidden = false
             url =  Constants.DemoURL
             performSegueWithIdentifier(Constants.ShowURLSegue, sender: nil)
             //        if let url = NSURL(string: Constants.DemoURL) {
@@ -276,7 +317,9 @@ class ViewController: UIViewController {
                 geometryNode.scale = SCNVector3Make(1.2, 1.2, 1.2)
             } else {
                 let result = geometryLabel.text?.componentsSeparatedByString("\n")
-                geometryLabel.text = result![0] + " " + result![1] + "," + result![2]
+                if result?.count > 1 {
+                    geometryLabel.text = result![0] + " " + result![1] + "," + result![2]
+                }
                 geometryNode.scale = SCNVector3Make(2.4, 2.4, 2.4)
             }
         }
@@ -301,4 +344,19 @@ class ViewController: UIViewController {
         }
         sceneView.play(nil)
     }
+    let hints = ["HELPful Chem 3D Hints",
+        "Pan opening scene just for fun - VanDerWaalsRadius",
+        "Double Tap any atom on opening scene to view web",
+        "Any wikipedia page viewed is cached for offline use",
+        "While viewing wikipedia in app, links are live",
+        "SwipeLeft (goBack) and Right on multi-traversed pages",
+        "Touch any lower [chemical name] to view 3D molecule",
+        "Swipe background on any chem page for periodic table",
+        "Tap spinning 3D molecule to view wikipedia page...",
+        "Next, Tap the paused molecule to see each element",
+        "Touch DEMO to view web page with developer videos...",
+        "Next, touch ◁Back to Chem 3D to return to app",
+        "Next, tap for ChemSketch info page...and return...",
+        "Next, double tap for ChemSketch_Guide info page...",
+        "Again, swipe background for periodic table"]
 }

@@ -28,6 +28,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView hidden="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JI-72-U7v">
+                                <rect key="frame" x="0.0" y="250" width="600" height="216"/>
+                            </pickerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="R5x-2P-1Ow" userLabel="topSegCtrl">
                                 <rect key="frame" x="10" y="474" width="580" height="29"/>
                                 <segments>
@@ -85,11 +88,13 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="MyH-Mb-dSr" firstAttribute="leading" secondItem="R5x-2P-1Ow" secondAttribute="leading" id="5l3-zY-heD"/>
+                            <constraint firstItem="3JI-72-U7v" firstAttribute="centerX" secondItem="t7N-4P-BBo" secondAttribute="centerX" id="5ra-it-84C"/>
                             <constraint firstItem="MyH-Mb-dSr" firstAttribute="centerX" secondItem="ngx-Y8-Uaw" secondAttribute="centerX" id="5tw-HH-htI"/>
                             <constraint firstItem="0Vc-Jz-vJe" firstAttribute="top" secondItem="QJf-B5-oYh" secondAttribute="bottom" constant="8" symbolic="YES" id="9Kz-Sw-irc"/>
                             <constraint firstItem="qaP-2M-6RJ" firstAttribute="top" secondItem="R5x-2P-1Ow" secondAttribute="bottom" constant="2" id="DAa-qw-Xt2"/>
                             <constraint firstAttribute="centerX" secondItem="t7N-4P-BBo" secondAttribute="centerX" id="FUJ-VW-Ylv"/>
                             <constraint firstItem="QJf-B5-oYh" firstAttribute="height" secondItem="Jki-09-U1l" secondAttribute="height" id="LKe-9d-IAd"/>
+                            <constraint firstItem="3JI-72-U7v" firstAttribute="trailing" secondItem="t7N-4P-BBo" secondAttribute="trailing" id="Mge-dd-jZ0"/>
                             <constraint firstItem="QJf-B5-oYh" firstAttribute="width" secondItem="Jki-09-U1l" secondAttribute="width" id="TW3-Vq-P8U"/>
                             <constraint firstItem="qaP-2M-6RJ" firstAttribute="width" secondItem="Jki-09-U1l" secondAttribute="width" id="U34-32-3to"/>
                             <constraint firstItem="MyH-Mb-dSr" firstAttribute="top" secondItem="RRu-UE-yHb" secondAttribute="bottom" constant="10" id="UeK-iB-db7"/>
@@ -102,6 +107,8 @@
                             <constraint firstItem="R5x-2P-1Ow" firstAttribute="leading" secondItem="ngx-Y8-Uaw" secondAttribute="leadingMargin" constant="-10" id="eT4-uO-NhZ"/>
                             <constraint firstItem="QJf-B5-oYh" firstAttribute="centerX" secondItem="Jki-09-U1l" secondAttribute="centerX" id="fge-4d-vsT"/>
                             <constraint firstItem="R5x-2P-1Ow" firstAttribute="centerX" secondItem="qaP-2M-6RJ" secondAttribute="centerX" id="mAN-JL-Aaz"/>
+                            <constraint firstItem="R5x-2P-1Ow" firstAttribute="top" secondItem="3JI-72-U7v" secondAttribute="bottom" constant="8" symbolic="YES" id="mVS-e0-MGS"/>
+                            <constraint firstItem="3JI-72-U7v" firstAttribute="leading" secondItem="t7N-4P-BBo" secondAttribute="leading" id="pl9-vX-SE7"/>
                             <constraint firstItem="t7N-4P-BBo" firstAttribute="leading" secondItem="ngx-Y8-Uaw" secondAttribute="leading" id="skR-ng-vkJ"/>
                             <constraint firstItem="qaP-2M-6RJ" firstAttribute="height" secondItem="Jki-09-U1l" secondAttribute="height" id="vql-RN-gLy"/>
                             <constraint firstItem="QJf-B5-oYh" firstAttribute="top" secondItem="Jki-09-U1l" secondAttribute="bottom" constant="2" id="xdB-Cg-7ig"/>
@@ -112,6 +119,7 @@
                     <connections>
                         <outlet property="bottomSegControl" destination="QJf-B5-oYh" id="MRz-II-siV"/>
                         <outlet property="geometryLabel" destination="MyH-Mb-dSr" id="tKp-MT-Y3x"/>
+                        <outlet property="helpPickerView" destination="3JI-72-U7v" id="BNZ-AS-7Ur"/>
                         <outlet property="sceneView" destination="t7N-4P-BBo" id="a1r-mU-yvs"/>
                         <outlet property="secondSegControl" destination="qaP-2M-6RJ" id="rFM-xW-yx1"/>
                         <outlet property="thirdSegControl" destination="Jki-09-U1l" id="Mnd-Zz-7ID"/>
@@ -163,14 +171,8 @@
                             <constraint firstItem="l55-UF-Gc9" firstAttribute="top" secondItem="7EX-Ce-cq2" secondAttribute="bottom" constant="-20" id="dZ8-5R-Ijg"/>
                             <constraint firstItem="l55-UF-Gc9" firstAttribute="top" secondItem="a3a-jJ-YU7" secondAttribute="top" constant="-15" id="dfz-oR-FLU"/>
                             <constraint firstItem="o6a-Dv-hKQ" firstAttribute="centerX" secondItem="l55-UF-Gc9" secondAttribute="centerX" id="mzv-yF-3gs"/>
-                            <constraint firstItem="l55-UF-Gc9" firstAttribute="top" secondItem="a3a-jJ-YU7" secondAttribute="top" constant="-33" id="rgT-CN-UKa"/>
                             <constraint firstItem="o6a-Dv-hKQ" firstAttribute="centerY" secondItem="l55-UF-Gc9" secondAttribute="centerY" id="tyK-HI-idn"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="rgT-CN-UKa"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="spinner" destination="o6a-Dv-hKQ" id="4Gr-fW-7aJ"/>

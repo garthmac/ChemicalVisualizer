@@ -32,8 +32,8 @@ class BrowserViewController: UIViewController, UIWebViewDelegate {
             }
         }
     }
-    @IBOutlet weak var webView: UIWebView!  //WKWebView
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var webView: UIWebView!  //WKWebView
     //MARK: IBAction
     @IBAction func unwind(sender: UIButton) {
         if let vc = presentingViewController as? ViewController {
